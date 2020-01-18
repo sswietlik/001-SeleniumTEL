@@ -6,14 +6,13 @@ public class FirstTest {
     @Test
     //@Test - to adnotacja z JUnit mówiąca że3 metoda pod nią jest testem
     public void demoTest(){
-        System.setProperty()
-
-
+        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
         // METODA o nazwie demoTest
         WebDriver driver = new ChromeDriver();      //Inicjacja WD tworzy chromedrivera - WD interfejs a CD klasa implementująca ten interface
                         // Teraz podpinamy w POM "selenium" / zależności
                         // Przechodzimy do POM a potem (Alt+Insert) lub ...
                         // CODE -> GENERATE -> DEPENDENCY TEMPLATE -> I dodajemy z MVNRepository
                         // Dorzucamy SeleniumJAVA, JUnit Jupiter,
+        driver.navigate().to("https://wp.pl");
     }
 }
