@@ -1,18 +1,42 @@
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class FirstTest {
-    @Test
-    //@Test - to adnotacja z JUnit mówiąca że3 metoda pod nią jest testem
-    public void demoTest(){
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-        // METODA o nazwie demoTest
-        WebDriver driver = new ChromeDriver();      //Inicjacja WD tworzy chromedrivera - WD interfejs a CD klasa implementująca ten interface
-                        // Teraz podpinamy w POM "selenium" / zależności
-                        // Przechodzimy do POM a potem (Alt+Insert) lub ...
-                        // CODE -> GENERATE -> DEPENDENCY TEMPLATE -> I dodajemy z MVNRepository
-                        // Dorzucamy SeleniumJAVA, JUnit Jupiter,
-        driver.navigate().to("https://wp.pl");
+
+    WebDriver driver;  //wyrzucam Webdirver driver do ciała całej klasy
+
+    @BeforeEach
+    public void driverSetup(){
+        System.setProperty("webdriver.chrome.driver","src/main/resources/chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.manage().window().setSize(new Dimension(480, 640));
     }
-}
+
+    @AfterEach
+    public void driverQuit(){
+        driver.quit();
+    }
+
+    @Test
+    public void getMethod(){
+        driver.get("https://wp.pl");
+    }
+
+    @Test
+    public void navigate(){
+        driver.navigate().to("https://google.pl"); //Metoda navigate korzysta z metody get
+        driver.navigate().to("https://amazon.com");
+        driver.navigate().back();
+        driver.navigate().forward();
+        driver.navigate().refresh();
+    }
+
+
+    }
+
